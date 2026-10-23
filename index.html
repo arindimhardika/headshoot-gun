@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Nova Blaster</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="game-wrap">
+
+  <canvas id="game" aria-label="Area permainan Nova Blaster"></canvas>
+
+  <!-- Peringatan nyawa tinggal satu -->
+  <div id="danger" aria-hidden="true"></div>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div class="hud-left">
+      <div class="stat"><span class="label">Skor</span><span id="score">0</span></div>
+      <div class="stat"><span class="label">Rekor</span><span id="hi-score">0</span></div>
+    </div>
+    <div class="hud-center">
+      <div id="wave" class="wave">Gelombang 1</div>
+      <div id="combo" class="combo">x1</div>
+    </div>
+    <div class="hud-right">
+      <div id="lives" class="lives" aria-label="Nyawa"></div>
+      <div id="bombs" class="bombs" aria-label="Bom"></div>
+      <div class="stat"><span class="label">Bintang</span><span id="coins">0</span></div>
+    </div>
+  </div>
+
+  <!-- Indikator power-up aktif -->
+  <div id="powerups" class="powerups hidden" aria-label="Power-up aktif"></div>
+
+  <!-- Bar nyawa bos -->
+  <div id="boss-bar" class="boss-bar hidden" aria-hidden="true">
+    <span class="boss-name" id="boss-name">BOS</span>
+    <div class="boss-track"><i id="boss-fill"></i></div>
+  </div>
+
+  <!-- Spanduk gelombang dan pesan singkat -->
+  <div id="banner" class="banner" role="status" aria-live="polite"></div>
+
+  <!-- Tombol kontrol saat bermain -->
+  <div id="controls" class="controls hidden">
+    <button id="btn-pause" class="icon-btn" type="button" aria-label="Jeda">⏸</button>
+    <button id="btn-sound" class="icon-btn" type="button" aria-label="Nyalakan atau matikan suara">🔊</button>
+  </div>
+  <button id="btn-bomb" class="bomb-btn hidden" type="button" aria-label="Pakai bom">
+    <span class="bomb-icon">💥</span><span class="bomb-text">BOM</span>
+  </button>
+
+  <!-- LAYAR JUDUL -->
+  <section id="screen-title" class="screen active">
+    <h1 class="logo">NOVA<br><span>BLASTER</span></h1>
+    <p class="tagline">Bertahanlah dari serbuan alien dan meteor!</p>
+
+    <div class="ship-picker">
+      <p class="mini">Pilih pesawat</p>
+      <div id="ships" class="ships" role="group" aria-label="Pilih pesawat"></div>
+    </div>
+
+    <div class="stack">
+      <button id="btn-start" class="btn primary" type="button">MULAI</button>
+      <button id="btn-help" class="btn" type="button">Cara main</button>
+    </div>
+
+    <div class="title-info">
+      <div>Rekor tertinggi: <b id="title-hi">0</b></div>
+      <div>Bintang terkumpul: <b id="title-coins">0</b></div>
+    </div>
+    <div id="daily" class="daily"></div>
+  </section>
+
+  <!-- LAYAR CARA MAIN -->
+  <section id="screen-help" class="screen">
+    <h2>Cara main</h2>
+    <ul class="help-list">
+      <li><b>Gerak:</b> mouse, tombol panah, atau WASD. Di HP, geser jari.</li>
+      <li><b>Tembak:</b> klik atau tahan spasi. Di HP, tembakan otomatis.</li>
+      <li><b>Bom:</b> tekan B atau tombol BOM. Membersihkan semua musuh di layar.</li>
+      <li><b>Jeda:</b> tekan P atau Esc.</li>
+      <li><b>Combo:</b> tembakan beruntun tanpa meleset menaikkan pengali skor. Terkena musuh mengembalikannya ke x1.</li>
+      <li><b>Power-up:</b> ambil benda yang jatuh dari musuh untuk tembakan ganda, perisai, waktu melambat, magnet, atau nyawa tambahan.</li>
+      <li><b>Bos:</b> muncul setiap 5 gelombang. Hindari pola serangannya!</li>
+    </ul>
+    <button id="btn-help-back" class="btn primary" type="button">Mengerti</button>
+  </section>
+
+  <!-- LAYAR JEDA -->
+  <section id="screen-pause" class="screen">
+    <h2>Jeda</h2>
+    <div class="stack">
+      <button id="btn-resume" class="btn primary" type="button">Lanjutkan</button>
+      <button id="btn-restart" class="btn" type="button">Mulai ulang</button>
+      <button id="btn-quit" class="btn" type="button">Menu utama</button>
+    </div>
+  </section>
+
+  <!-- LAYAR GAME OVER -->
+  <section id="screen-over" class="screen">
+    <h2 class="over-title">GAME OVER</h2>
+    <div class="result">
+      <div class="result-row"><span>Skor</span><b id="final-score">0</b></div>
+      <div class="result-row"><span>Gelombang</span><b id="final-wave">1</b></div>
+      <div class="result-row"><span>Combo tertinggi</span><b id="final-combo">x1</b></div>
+      <div class="result-row"><span>Bintang didapat</span><b id="final-coins">0</b></div>
+    </div>
+    <p id="new-record" class="new-record hidden">Rekor baru!</p>
+    <div class="stack">
+      <button id="btn-retry" class="btn primary" type="button">Coba lagi</button>
+      <button id="btn-menu" class="btn" type="button">Menu utama</button>
+    </div>
+  </section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
